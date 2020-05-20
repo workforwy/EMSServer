@@ -49,13 +49,13 @@
 
     <servlet-mapping>
         <!-- 必须于上一个servlet标签中的名称保持一致 -->
-        <servlet-name>addEmp</servlet-name>
+        <servlet-name>AddEmpServlet</servlet-name>
         <!-- 这是你在浏览器上访问的地址,必须要提 /servlet/xxxx 格式，不然tomcat启动会报错-->
-        <url-pattern>/web/AddEmpServlet</url-pattern>
+        <url-pattern>/AddEmpServlet</url-pattern>
     </servlet-mapping>
     <servlet>
         <!-- 当前servlet的名称 -->
-        <servlet-name>addEmp</servlet-name>
+        <servlet-name>AddEmpServlet</servlet-name>
         <!-- servlet所在的包名跟类名 -->
         <servlet-class>web.AddEmpServlet</servlet-class>
     </servlet>
