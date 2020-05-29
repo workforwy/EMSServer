@@ -3,7 +3,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>登录测试</title>
-<script type="text/javascript" src="my.js"></script>
 <script type="text/javascript">
 
 function checkName(){
@@ -27,7 +26,6 @@ function checkName(){
 	}
 }
 
-	
 function checkPwd(){
 	//1.获取文本框中的数据 
 	var pwd=document.getElementById("pwd").value;
@@ -56,13 +54,13 @@ function checkForm(){
 </head>
 <body>
 	<h3>表单验证</h3>
-	<form action="login.do" method="post" onsubmit="return checkForm();">
+	<form action="/EMSServer/LoginServlet" method="post" >
 	登录账号：
-	<input id="name" onblur="checkName()" type="text" name="name" />
+	<input id="name"  type="text" name="name" />
 	<span id="name_s"></span>
 	<br/><br/>
 	登录密码：
-	<input id="pwd" onblur="checkPwd()" type="password" name="pwd" />
+	<input id="pwd" type="password" name="pwd" />
 	<span id="pwd_s"></span>
 	<br/><br/>
 	<input type="submit" value="登录"/>

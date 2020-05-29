@@ -12,8 +12,8 @@ import java.io.PrintWriter;
 
 /** 处理delEmp?id=1 删除请求  删除员工 */
 public class DelEmpServlet extends HttpServlet {
-	public void service(HttpServletRequest request,
-                        HttpServletResponse response)
+	@Override
+	public void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//编码
 		response.setContentType("text/html;charset=utf-8");

@@ -3,9 +3,64 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+
+    <welcome-file-list>
+        <welcome-file>./page/login.html</welcome-file>
+    </welcome-file-list>
     <listener>
         <listener-class>web.WebInitListener</listener-class>
     </listener>
+
+    <filter>
+        <filter-name>FilterDemo</filter-name>
+        <filter-class>FilterDemo</filter-class>
+        <init-param>
+            <param-name>word_file</param-name>
+            <param-value>/WEB-INF/word.txt</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>FilterDemo</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+    <!-- 通用参数 -->
+    <context-param>
+        <param-name>name</param-name>
+        <param-value>zhongfucheng</param-value>
+    </context-param>
+    <servlet>
+        <!-- 当前servlet的名称 -->
+        <servlet-name>AddEmpServlet</servlet-name>
+        <!-- servlet所在的包名跟类名 -->
+        <servlet-class>web.AddEmpServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <!-- 必须于上一个servlet标签中的名称保持一致 -->
+        <servlet-name>AddEmpServlet</servlet-name>
+        <!-- 这是你在浏览器上访问的地址,必须要提 /servlet/xxxx 格式，不然tomcat启动会报错-->
+        <url-pattern>/AddEmpServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>web.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MyServlet</servlet-name>
+        <servlet-class>web.MyServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MyServlet</servlet-name>
+        <url-pattern>/MyServlet</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>userAction</servlet-name>
         <servlet-class>web.UserServlet</servlet-class>
@@ -14,6 +69,7 @@
         <servlet-name>userAction</servlet-name>
         <url-pattern>*.do</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <servlet-name>updateEmp</servlet-name>
         <servlet-class>web.UpdateEmpServlet</servlet-class>
@@ -22,6 +78,7 @@
         <servlet-name>updateEmp</servlet-name>
         <url-pattern>/updateEmp</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <servlet-name>showEmp</servlet-name>
         <servlet-class>web.ShowEmpServlet</servlet-class>
@@ -30,6 +87,7 @@
         <servlet-name>showEmp</servlet-name>
         <url-pattern>/showEmp</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <servlet-name>delEmp</servlet-name>
         <servlet-class>web.DelEmpServlet</servlet-class>
@@ -38,6 +96,7 @@
         <servlet-name>delEmp</servlet-name>
         <url-pattern>/delEmp</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <servlet-name>listEmp</servlet-name>
         <servlet-class>web.ListEmpServlet</servlet-class>
@@ -47,25 +106,4 @@
         <url-pattern>/listEmp</url-pattern>
     </servlet-mapping>
 
-    <servlet-mapping>
-        <!-- 必须于上一个servlet标签中的名称保持一致 -->
-        <servlet-name>AddEmpServlet</servlet-name>
-        <!-- 这是你在浏览器上访问的地址,必须要提 /servlet/xxxx 格式，不然tomcat启动会报错-->
-        <url-pattern>/AddEmpServlet</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <!-- 当前servlet的名称 -->
-        <servlet-name>AddEmpServlet</servlet-name>
-        <!-- servlet所在的包名跟类名 -->
-        <servlet-class>web.AddEmpServlet</servlet-class>
-    </servlet>
-
-<!--    <servlet>-->
-<!--        <servlet-name>LoginServlet</servlet-name>-->
-<!--        <servlet-class>com.breeze.servlet.LoginServlet</servlet-class>-->
-<!--    </servlet>-->
-<!--    <servlet-mapping>-->
-<!--        <servlet-name>LoginServlet</servlet-name> 与上面的 <servlet-name> 要一致-->
-<!--        <url-pattern>/servlet/LoginServlet</url-pattern>-->
-<!--    </servlet-mapping>-->
 </web-app>

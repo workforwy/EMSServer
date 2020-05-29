@@ -16,12 +16,8 @@ import java.io.PrintWriter;
  */
 public class AddEmpServlet extends HttpServlet {
 
-    public AddEmpServlet() {
-    }
-
-    public void service(HttpServletRequest request,
-                        HttpServletResponse response)
-            throws ServletException, IOException {
+    @Override
+    public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //±‡¬Î¥¶¿Ì
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");

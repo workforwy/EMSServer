@@ -3,7 +3,6 @@ package entity;
 import java.io.Serializable;
 
 public class User implements Serializable {
-	private static final long serialVersionUID = 768023542346L;
 
 	private int id;
 	private String loginname;
@@ -12,11 +11,10 @@ public class User implements Serializable {
 	private String email;
 
 	public User() {
-		// TODO Auto-generated constructor stub
+
 	}
 
-	public User(int id, String loginname, String password, String realname,
-			String email) {
+	public User(int id, String loginname, String password, String realname, String email) {
 		super();
 		this.id = id;
 		this.loginname = loginname;

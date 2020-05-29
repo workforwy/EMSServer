@@ -1,18 +1,21 @@
 package entity;
 
 public class Emp {
+	
 	private int id;
+	
 	private String name;
+	
 	private double salary;
+	
 	private int age;
+	
 	private String gender;
 
 	public Emp() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Emp(int id, String name, double salary, int age, String gender) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.salary = salary;
@@ -59,20 +62,4 @@ public class Emp {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-
-	@Override
-	public int hashCode() {
-		return super.hashCode();
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		return super.equals(obj);
-	}
-
-	@Override
-	public String toString() {
-		return super.toString();
-	}
-
 }
