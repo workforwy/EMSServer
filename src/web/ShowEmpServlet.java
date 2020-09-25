@@ -1,8 +1,8 @@
 package web;
 
 import entity.Emp;
+import service.EmpServiceImp;
 import service.EmpService;
-import service.EmpServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +15,8 @@ import java.io.PrintWriter;
  * 接收/showEmp请求， 展现回填的表单页面
  */
 public class ShowEmpServlet extends HttpServlet {
+
+    @Override
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //编码
         response.setContentType("text/html;charset=utf-8");
@@ -22,7 +24,7 @@ public class ShowEmpServlet extends HttpServlet {
         //1. 获取id 参数
         String id = request.getParameter("id");
         //2. 通过id  调用jdbc  查询相应员工的数据
-        EmpService service = new EmpServiceImpl();
+        EmpServiceImp service = new EmpService();
         Emp e = null;
         try {
             e = service.findById(Integer.parseInt(id));

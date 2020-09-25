@@ -1,23 +1,42 @@
 package dao;
 
 import entity.User;
+import util.DBUtil;
 
-public interface UserDao {
-	/***
-	 * 通过登录账号查询用户信息
-	 * @param name 登录账号  
-	 * @return 
-	 *   user!=null  返回查到的用户对象
-	 *   user==null  查无此人 
-	 * @throws Exception
-	 */
-	public User findByLoginname(String name)throws Exception;
-	
-	/***
-	 * 保存用户信息
-	 * @param user
-	 * @throws Exception
-	 */
-	public void save(User user)throws Exception;
-	
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+public class UserDao implements UserDaoImp {
+
+	@Override
+	public User findByLoginname(String name) throws Exception {
+		Connection conn= DBUtil.getConnection();
+		String sql="select * from user where loginname=?";
+		PreparedStatement stmt=conn.prepareStatement(sql);
+		stmt.setString(1, name);
+		ResultSet res=stmt.executeQuery();
+		User user=null;
+		if(res.next()){
+			user=new User();
+			user.setId(res.getInt("id"));
+			user.setEmail(res.getString("email"));
+			user.setLoginname(res.getString("loginname"));
+			user.setRealname(res.getString("realname"));
+			user.setPassword(res.getString("password"));
+		}
+		return user;
+	}
+
+	@Override
+	public void save(User user) throws Exception {
+		Connection conn= DBUtil.getConnection();
+		String sql="insert into user (loginname, password, realname, email) values (?,?,?,?)";
+		PreparedStatement stmt=conn.prepareStatement(sql);
+		stmt.setString(1, user.getLoginname());
+		stmt.setString(2, user.getPassword());
+		stmt.setString(3, user.getRealname());
+		stmt.setString(4, user.getEmail());
+		stmt.executeUpdate();
+	}
 }

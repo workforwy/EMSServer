@@ -1,8 +1,8 @@
 package web;
 
 import entity.Emp;
+import service.EmpServiceImp;
 import service.EmpService;
-import service.EmpServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 
 /**
  * 接收addEmp请求  接收参数后插入数据库
+ * @author wangyong
  */
 public class AddEmpServlet extends HttpServlet {
 
@@ -29,7 +30,7 @@ public class AddEmpServlet extends HttpServlet {
         String gender = request.getParameter("gender");
         Emp e = new Emp(0, name, Double.parseDouble(salary), Integer.parseInt(age), gender);
         //2.把数据插入数据库
-        EmpService service = new EmpServiceImpl();
+        EmpServiceImp service = new EmpService();
         try {
             service.addEmp(e);
         } catch (Exception e1) {

@@ -1,8 +1,8 @@
 package web;
 
 import entity.Emp;
+import service.EmpServiceImp;
 import service.EmpService;
-import service.EmpServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +15,8 @@ import java.util.List;
 
 /** 处理listEmp请求，生成表格页面输出 */
 public class ListEmpServlet extends HttpServlet {
+
+	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// 编码
@@ -23,7 +25,7 @@ public class ListEmpServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		// 1. 使用JDBC查询所有员工数据 List<Emp>
 		List<Emp> emps = new ArrayList<Emp>();
-		EmpService service = new EmpServiceImpl();
+		EmpServiceImp service = new EmpService();
 		//获取请求参数  
 		//起始条目的下标index
 		//向后查询多少条  pagesize

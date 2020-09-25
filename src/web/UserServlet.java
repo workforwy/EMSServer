@@ -5,8 +5,8 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import entity.User;
 import exception.NameAlreadyUseException;
 import exception.NameOrPwdErrorException;
+import service.UserServiceImp;
 import service.UserService;
-import service.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,9 +24,9 @@ import java.util.Random;
  * 用于处理用户相关的请求
  */
 public class UserServlet extends HttpServlet {
-    public void service(HttpServletRequest request,
-                        HttpServletResponse response)
-            throws ServletException, IOException {
+
+    @Override
+    public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //编码同一处理
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
@@ -45,15 +45,11 @@ public class UserServlet extends HttpServlet {
     /**
      * 生成验证码图片
      */
-    public void getCode(HttpServletRequest request,
-                        HttpServletResponse resp)
-            throws IOException, ServletException {
+    public void getCode(HttpServletRequest request, HttpServletResponse resp) throws IOException, ServletException {
         //定义响应的内容类型
         resp.setContentType("image/jpeg");
         //绘制验证码图片
-        BufferedImage image =
-                new BufferedImage(130, 50,
-                        BufferedImage.TYPE_INT_RGB);
+        BufferedImage image = new BufferedImage(130, 50, BufferedImage.TYPE_INT_RGB);
         //获取用于绘制该图片的画笔对象
         Graphics g = image.getGraphics();
         //绘制背景
@@ -75,17 +71,14 @@ public class UserServlet extends HttpServlet {
         //把该图片压缩成JPEG格式
         //并且输出到客户端
         OutputStream os = resp.getOutputStream();
-        JPEGImageEncoder encoder =
-                JPEGCodec.createJPEGEncoder(os);
+        JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(os);
         encoder.encode(image);
     }
 
     /**
      * 处理登录请求
      */
-    public void login(HttpServletRequest request,
-                      HttpServletResponse resp)
-            throws IOException, ServletException {
+    public void login(HttpServletRequest request, HttpServletResponse resp) throws IOException, ServletException {
         PrintWriter out = resp.getWriter();
         //1  获取两个请求参数
         String name = request.getParameter("loginname");
@@ -100,7 +93,7 @@ public class UserServlet extends HttpServlet {
             return;
         }
         //2  调用业务层执行登录业务
-        UserService service = new UserServiceImpl();
+        UserServiceImp service = new UserService();
         try {
             service.login(name, pwd);
             //3  根据不同的返回值 返回相应json
@@ -117,9 +110,7 @@ public class UserServlet extends HttpServlet {
     /**
      * 处理注册请求
      */
-    public void regist(HttpServletRequest request,
-                       HttpServletResponse resp)
-            throws IOException, ServletException {
+    public void regist(HttpServletRequest request, HttpServletResponse resp) throws IOException, ServletException {
         PrintWriter out = resp.getWriter();
         //1.获取参数
         String loginname = request.getParameter("loginname");
@@ -128,7 +119,7 @@ public class UserServlet extends HttpServlet {
         String email = request.getParameter("email");
         User user = new User(0, loginname, password, realname, email);
         //2. 调用业务层 执行注册业务
-        UserService service = new UserServiceImpl();
+        UserServiceImp service = new UserService();
         try {
             service.regist(user);
             //3. 根据不同的返回值 返回不同的json
@@ -144,10 +135,8 @@ public class UserServlet extends HttpServlet {
 
     public Color randomColor() {
         Random r = new Random();
-        return new Color(r.nextInt(255),
-                r.nextInt(255), r.nextInt(255));
+        return new Color(r.nextInt(255), r.nextInt(255), r.nextInt(255));
     }
-
 }
 
 

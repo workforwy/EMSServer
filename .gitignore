@@ -1,3 +1,4 @@
 /build
 .idea
 out
+web/WEB_INF/classes

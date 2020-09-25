@@ -12,22 +12,15 @@ import java.io.PrintWriter;
 
 /**
  * 接收/login.do请求， 判断登录是否成功
+ *
+ * @author wangyong
  */
 public class LoginServlet extends HttpServlet {
 
-//    @Override
-//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        super.doGet(req, resp);
-//    }
-//
-//    @Override
-//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        super.doPost(req, resp);
-////        ServletConfig servletConfig = this.getServletConfig();
-////        System.out.println("name:" + servletConfig.getInitParameter("name"));
-////
-////        req.getSession();
-//    }
+    @Override
+    public void init() throws ServletException {
+        super.init();
+    }
 
     @Override
     public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException {
@@ -43,12 +36,41 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html; charset=utf-8");
 
         PrintWriter out = response.getWriter();
-        if ("zhangsan".equals(name) && "123456".equals(pwd)) {//成功
+        //成功
+        if ("zhangsan".equals(name) && "123456".equals(pwd)) {
             out.println("success");
         } else {//失败
             out.println("error");
         }
         out.close();
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doGet(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doPost(req, resp);
+        ServletConfig servletConfig = this.getServletConfig();
+        System.out.println("name:" + servletConfig.getInitParameter("name"));
+        req.getSession();
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doPut(req, resp);
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doDelete(req, resp);
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
     }
 }
 

@@ -5,15 +5,16 @@ import java.util.Properties;
 
 /**
  * 用于读取properties配置文件
+ * @author wangyong
  */
 public class DaoConfig {
+
     private static Properties prop = new Properties();
 
     /* 静态代码块  类加载时执行1次*/
     static {
         try {
-            prop.load(DaoConfig.class.getClassLoader()
-                    .getResourceAsStream("util/dao.properties"));
+            prop.load(DaoConfig.class.getClassLoader().getResourceAsStream("util/dao.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }

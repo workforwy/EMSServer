@@ -1,47 +1,59 @@
 package service;
 
+import dao.EmpDaoImp;
 import entity.Emp;
+import util.DBUtil;
+import util.DaoFactory;
 
 import java.util.List;
 
-/**处理员工业务*/
-public interface EmpService {
-	/**
-	 * 根据id查询员工业务
-	 * @param id
-	 * @return
-	 * @throws Exception
-	 */
-	public Emp findById(int id)throws Exception;
-	
-	/**
-	 * 查询所有员工信息业务
-	 * @return
-	 * @throws Exception
-	 */
-	public List<Emp> findAll()throws Exception;
-	
-	public List<Emp> findAll(int index, int pagesize)throws Exception;
-	
-	/**
-	 * 更新员工信息业务
-	 * @param e
-	 * @throws Exception
-	 */
-	public void updateEmp(Emp e)throws Exception;
-	
-	/**
-	 * 移除员工业务
-	 * @param id
-	 * @throws Exception
-	 */
-	public void removeEmp(int id)throws Exception;
-	
-	/**
-	 * 添加员工业务
-	 * @param e 
-	 * @throws Exception
-	 */
-	public void addEmp(Emp e) throws Exception;
-	
+public class EmpService implements EmpServiceImp {
+
+    private EmpDaoImp dao = (EmpDaoImp) DaoFactory.getInstance("empDao");
+
+    @Override
+    public Emp findById(int id) throws Exception {
+        Emp e = dao.findById(id);
+        DBUtil.close();
+        return e;
+    }
+
+    @Override
+    public List<Emp> findAll() throws Exception {
+        List<Emp> emps = dao.findAll();
+        DBUtil.close();
+        return emps;
+    }
+
+    @Override
+    public List<Emp> findAll(int index, int pagesize) throws Exception {
+        List<Emp> emps = dao.findAll(index, pagesize);
+        DBUtil.close();
+        return emps;
+    }
+
+    @Override
+    public void updateEmp(Emp e) throws Exception {
+        DBUtil.openTransaction();
+        dao.update(e);
+        DBUtil.commit();
+        DBUtil.close();
+    }
+
+    @Override
+    public void removeEmp(int id) throws Exception {
+        DBUtil.openTransaction();
+        dao.delete(id);
+        DBUtil.commit();
+        DBUtil.close();
+    }
+
+    @Override
+    public void addEmp(Emp e) throws Exception {
+        DBUtil.openTransaction();
+        dao.save(e);
+        DBUtil.commit();
+        DBUtil.close();
+    }
+
 }

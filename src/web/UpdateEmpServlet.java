@@ -1,8 +1,8 @@
 package web;
 
 import entity.Emp;
+import service.EmpServiceImp;
 import service.EmpService;
-import service.EmpServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,8 +13,12 @@ import java.io.PrintWriter;
 
 /**
  * 处理updateEmp请求，更新员工信息
+ *
+ * @author wangyong
  */
 public class UpdateEmpServlet extends HttpServlet {
+
+    @Override
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //编码
         request.setCharacterEncoding("utf-8");
@@ -28,7 +32,7 @@ public class UpdateEmpServlet extends HttpServlet {
         String id = request.getParameter("id");
         Emp e = new Emp(Integer.parseInt(id), name, Double.parseDouble(salary), Integer.parseInt(age), gender);
         //执行jdbc  update语句
-        EmpService service = new EmpServiceImpl();
+        EmpServiceImp service = new EmpService();
         try {
             service.updateEmp(e);
         } catch (Exception e1) {
