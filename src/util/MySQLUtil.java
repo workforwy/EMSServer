@@ -1,39 +1,39 @@
 package util;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+import util.JDBCConfig;
+
+import java.sql.*;
 
 /**
  * @author wangyong
  */
-public class DBUtil {
+public class MySQLUtil {
 
     private static ThreadLocal<Connection> conns = new ThreadLocal<Connection>();
-    public static String URL = "ems.db";
 
     /**
-     * ÏÈÈ¥ThreadlocalÖĞÑ°ÕÒ µ±Ç°Ïß³ÌÊÇ·ñÒÑ¾­´´½¨¹ıConnection¶ÔÏó£¬
-     * ÓĞ£¬ÔòÖ±½Ó·µ»Ø¡£
-     * Ã»ÓĞ ÔÚÖØĞÂ´´½¨
+     * å…ˆå»Threadlocalä¸­å¯»æ‰¾ å½“å‰çº¿ç¨‹æ˜¯å¦å·²ç»åˆ›å»ºè¿‡Connectionå¯¹è±¡ï¼Œ
+     * æœ‰ï¼Œåˆ™ç›´æ¥è¿”å›ã€‚
+     * æ²¡æœ‰ åœ¨é‡æ–°åˆ›å»º
      */
     public static Connection getConnection() throws Exception {
         Connection conn = conns.get();
         if (conn == null) {
             try {
-                Class.forName("org.sqlite.JDBC");
-                conn = DriverManager.getConnection("jdbc:sqlite:" + URL);
+                Class.forName(JDBCConfig.JDBC_DRIVER);
+                conn = DriverManager.getConnection(JDBCConfig.DB_URL, JDBCConfig.USER, JDBCConfig.PASS);
             } catch (Exception e) {
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
                 System.exit(0);
             }
-            //´æÈëThreadLocal
+            //å­˜å…¥ThreadLocal
             conns.set(conn);
         }
         return conn;
     }
 
     /**
-     * ¹Ø±ÕÁ¬½Ó¶ÔÏó
+     * å…³é—­è¿æ¥å¯¹è±¡
      *
      * @throws Exception
      */
@@ -41,13 +41,13 @@ public class DBUtil {
         Connection conn = conns.get();
         if (conn != null) {
             conn.close();
-            //°ÑThreadLocalÖĞµÄconnection¶ÔÏóÖÃnull
+            //æŠŠThreadLocalä¸­çš„connectionå¯¹è±¡ç½®null
             conns.set(null);
         }
     }
 
     /***
-     * ¿ªÆôÊı¾İ¿âÊÂÎñ
+     * å¼€å¯æ•°æ®åº“äº‹åŠ¡
      * @throws Exception
      */
     public static void openTransaction() throws Exception {
@@ -56,7 +56,7 @@ public class DBUtil {
     }
 
     /**
-     * Ìá½»ÊÂÎñ
+     * æäº¤äº‹åŠ¡
      *
      * @throws Exception
      */
@@ -64,7 +64,4 @@ public class DBUtil {
         Connection conn = conns.get();
         conn.commit();
     }
-
 }
-
-

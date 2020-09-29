@@ -2,6 +2,7 @@ package dao;
 
 import entity.Emp;
 import util.DBUtil;
+import util.MySQLUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -93,14 +94,15 @@ public class EmpDao implements EmpDaoImp {
 
     @Override
     public void save(Emp e) throws Exception {
-        Connection conn = DBUtil.getConnection();
+        Connection conn = MySQLUtil.getConnection();
         String sql = "insert  into emp (name, salary, age, gender) values (?,?,?,?)";
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setString(1, e.getName());
         stmt.setDouble(2, e.getSalary());
         stmt.setInt(3, e.getAge());
         stmt.setString(4, e.getGender());
-        stmt.executeUpdate();
+        int status = stmt.executeUpdate();
+        System.out.println(status);
     }
 
 }

@@ -2,8 +2,9 @@ package service;
 
 import dao.EmpDaoImp;
 import entity.Emp;
-import util.DBUtil;
+import util.MySQLUtil;
 import util.DaoFactory;
+import util.MySQLUtil;
 
 import java.util.List;
 
@@ -14,46 +15,46 @@ public class EmpService implements EmpServiceImp {
     @Override
     public Emp findById(int id) throws Exception {
         Emp e = dao.findById(id);
-        DBUtil.close();
+        MySQLUtil.close();
         return e;
     }
 
     @Override
     public List<Emp> findAll() throws Exception {
         List<Emp> emps = dao.findAll();
-        DBUtil.close();
+        MySQLUtil.close();
         return emps;
     }
 
     @Override
     public List<Emp> findAll(int index, int pagesize) throws Exception {
         List<Emp> emps = dao.findAll(index, pagesize);
-        DBUtil.close();
+        MySQLUtil.close();
         return emps;
     }
 
     @Override
     public void updateEmp(Emp e) throws Exception {
-        DBUtil.openTransaction();
+        MySQLUtil.openTransaction();
         dao.update(e);
-        DBUtil.commit();
-        DBUtil.close();
+        MySQLUtil.commit();
+        MySQLUtil.close();
     }
 
     @Override
     public void removeEmp(int id) throws Exception {
-        DBUtil.openTransaction();
+        MySQLUtil.openTransaction();
         dao.delete(id);
-        DBUtil.commit();
-        DBUtil.close();
+        MySQLUtil.commit();
+        MySQLUtil.close();
     }
 
     @Override
     public void addEmp(Emp e) throws Exception {
-        DBUtil.openTransaction();
+        MySQLUtil.openTransaction();
         dao.save(e);
-        DBUtil.commit();
-        DBUtil.close();
+        MySQLUtil.commit();
+        MySQLUtil.close();
     }
 
 }

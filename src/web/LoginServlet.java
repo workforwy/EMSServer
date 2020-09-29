@@ -17,45 +17,45 @@ import java.io.PrintWriter;
  */
 public class LoginServlet extends HttpServlet {
 
-    @Override
-    public void init() throws ServletException {
-        super.init();
+    public LoginServlet() {
+        super();
     }
 
     @Override
-    public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException {
-        super.service(request, response);
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //1. 获取请求参数name   pwd
-        response.setCharacterEncoding("utf-8");
-        String name = request.getParameter("name");
-        String pwd = request.getParameter("pwd");
+        resp.setCharacterEncoding("utf-8");
+        String name = req.getParameter("name");
+        String pwd = req.getParameter("pwd");
         System.out.println("name:" + name);
         System.out.println("pwd:" + pwd);
         //2. 判断登录是否成功
         //3. 根据判断的结果 输出不同的响应页面
-        response.setContentType("text/html; charset=utf-8");
+        resp.setContentType("text/html; charset=utf-8");
 
-        PrintWriter out = response.getWriter();
+
+
+
+
+        PrintWriter out = resp.getWriter();
         //成功
-        if ("zhangsan".equals(name) && "123456".equals(pwd)) {
+        if ("wy".equals(name) && "1".equals(pwd)) {
             out.println("success");
         } else {//失败
             out.println("error");
         }
         out.close();
-    }
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        // 要重定向的新位置
+        String site ="http://www.runoob.com";
+        resp.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
+        resp.setHeader("Location", site);
+
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
-        ServletConfig servletConfig = this.getServletConfig();
-        System.out.println("name:" + servletConfig.getInitParameter("name"));
-        req.getSession();
+        doGet(req,resp);
     }
 
     @Override

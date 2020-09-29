@@ -1,5 +1,7 @@
 package util;
 
+import config.DaoConfig;
+
 /**
  * dao工厂  用于生产dao子类实例
  */

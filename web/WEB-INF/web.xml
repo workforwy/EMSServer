@@ -3,6 +3,34 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+    <!-- 1. 通用参数 -->
+    <context-param>
+        <param-name>name</param-name>
+        <param-value>zhongfucheng</param-value>
+    </context-param>
+
+    <!-- 2. 初始化监听-->
+    <listener>
+        <listener-class>listener.WebInitListener</listener-class>
+    </listener>
+
+    <!-- 3. 过滤器设置-->
+    <filter>
+        <filter-name>BaseFilter</filter-name>
+        <filter-class>filter.BaseFilter</filter-class>
+        <init-param>
+            <param-name>Site</param-name>
+            <param-value>菜鸟教程</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>BaseFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <welcome-file-list>
+        <welcome-file>login.html</welcome-file>
+    </welcome-file-list>
 
     <servlet>
         <servlet-name>MyServlet</servlet-name>
@@ -13,55 +41,67 @@
         <url-pattern>/MyServlet</url-pattern>
     </servlet-mapping>
 
-<!--    <welcome-file-list>-->
-<!--        <welcome-file>./page/login.html</welcome-file>-->
-<!--    </welcome-file-list>-->
-<!--    <listener>-->
-<!--        <listener-class>web.WebInitListener</listener-class>-->
-<!--    </listener>-->
-
-    <filter>
-        <filter-name>FilterDemo</filter-name>
-        <filter-class>filter.BaseFilter</filter-class>
-        <init-param>
-            <param-name>word_file</param-name>
-            <param-value>/WEB-INF/word.txt</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>FilterDemo</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
-
-    <!-- 通用参数 -->
-    <context-param>
-        <param-name>name</param-name>
-        <param-value>zhongfucheng</param-value>
-    </context-param>
     <servlet>
-        <!-- 当前servlet的名称 -->
-        <servlet-name>AddEmpServlet</servlet-name>
-        <!-- servlet所在的包名跟类名 -->
-        <servlet-class>web.AddEmpServlet</servlet-class>
+        <servlet-name>CheckBox</servlet-name>
+        <servlet-class>web.CheckBox</servlet-class>
     </servlet>
     <servlet-mapping>
-        <!-- 必须于上一个servlet标签中的名称保持一致 -->
-        <servlet-name>AddEmpServlet</servlet-name>
-        <!-- 这是你在浏览器上访问的地址,必须要提 /servlet/xxxx 格式，不然tomcat启动会报错-->
-        <url-pattern>/AddEmpServlet</url-pattern>
+        <servlet-name>CheckBox</servlet-name>
+        <url-pattern>/CheckBox</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>LoginServlet</servlet-name>
+        <servlet-name>ReadParams</servlet-name>
+        <servlet-class>web.ReadParams</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReadParams</servlet-name>
+        <url-pattern>/ReadParams</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>HelloForm</servlet-name>
+        <servlet-class>web.HelloForm</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HelloForm</servlet-name>
+        <url-pattern>/HelloForm</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Upload</servlet-name>
+        <servlet-class>web.UploadServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Upload</servlet-name>
+        <url-pattern>/Upload</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Refresh</servlet-name>
+        <servlet-class>web.Refresh</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Refresh</servlet-name>
+        <url-pattern>/Refresh</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SendEmail</servlet-name>
+        <servlet-class>web.SendEmail</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SendEmail</servlet-name>
+        <url-pattern>/SendEmail</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Login</servlet-name>
         <servlet-class>web.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/LoginServlet</url-pattern>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login</url-pattern>
     </servlet-mapping>
-
-
 
     <servlet>
         <servlet-name>userAction</servlet-name>
@@ -73,8 +113,17 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>AddEmpServlet</servlet-name>
+        <servlet-class>web.emp.AddEmpServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddEmpServlet</servlet-name>
+        <url-pattern>/AddEmpServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>updateEmp</servlet-name>
-        <servlet-class>web.UpdateEmpServlet</servlet-class>
+        <servlet-class>web.emp.UpdateEmpServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>updateEmp</servlet-name>
@@ -83,7 +132,7 @@
 
     <servlet>
         <servlet-name>showEmp</servlet-name>
-        <servlet-class>web.ShowEmpServlet</servlet-class>
+        <servlet-class>web.emp.ShowEmpServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>showEmp</servlet-name>
@@ -92,7 +141,7 @@
 
     <servlet>
         <servlet-name>delEmp</servlet-name>
-        <servlet-class>web.DelEmpServlet</servlet-class>
+        <servlet-class>web.emp.DelEmpServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>delEmp</servlet-name>
@@ -101,11 +150,64 @@
 
     <servlet>
         <servlet-name>listEmp</servlet-name>
-        <servlet-class>web.ListEmpServlet</servlet-class>
+        <servlet-class>web.emp.ListEmpServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>listEmp</servlet-name>
         <url-pattern>/listEmp</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>SessionTrack</servlet-name>
+        <servlet-class>web.SessionTrack</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SessionTrack</servlet-name>
+        <url-pattern>/SessionTrack</url-pattern>
+    </servlet-mapping>
+
+    <session-config>
+        <session-timeout>5</session-timeout>
+    </session-config>
+
+
+    <!-- servlet 定义 -->
+    <servlet>
+        <servlet-name>ErrorHandler</servlet-name>
+        <servlet-class>web.ErrorHandler</servlet-class>
+    </servlet>
+    <!-- servlet 映射 -->
+    <servlet-mapping>
+        <servlet-name>ErrorHandler</servlet-name>
+        <url-pattern>/ErrorHandler</url-pattern>
+    </servlet-mapping>
+
+    <!-- error-code 相关的错误页面 -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/ErrorHandler</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/ErrorHandler</location>
+    </error-page>
+
+    <!-- exception-type 相关的错误页面 -->
+    <error-page>
+        <exception-type>
+            javax.servlet.ServletException
+        </exception-type>
+        <location>/ErrorHandler</location>
+    </error-page>
+
+    <error-page>
+        <exception-type>java.io.IOException</exception-type>
+        <location>/ErrorHandler</location>
+    </error-page>
+
+    <!--    通用的错误处理程序-->
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/ErrorHandler</location>
+    </error-page>
 </web-app>
