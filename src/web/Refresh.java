@@ -10,8 +10,10 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Refresh extends HttpServlet {
+
     private static final long serialVersionUID = 1L;
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // 设置刷新自动加载的事件间隔为 5 秒

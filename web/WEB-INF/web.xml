@@ -34,7 +34,7 @@
 
     <servlet>
         <servlet-name>MyServlet</servlet-name>
-        <servlet-class>web.MyServlet</servlet-class>
+        <servlet-class>web.Mine</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MyServlet</servlet-name>
@@ -70,7 +70,7 @@
 
     <servlet>
         <servlet-name>Upload</servlet-name>
-        <servlet-class>web.UploadServlet</servlet-class>
+        <servlet-class>web.Upload</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Upload</servlet-name>
@@ -96,7 +96,7 @@
 
     <servlet>
         <servlet-name>Login</servlet-name>
-        <servlet-class>web.LoginServlet</servlet-class>
+        <servlet-class>web.Login</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -105,7 +105,7 @@
 
     <servlet>
         <servlet-name>userAction</servlet-name>
-        <servlet-class>web.UserServlet</servlet-class>
+        <servlet-class>web.UserInfo</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>userAction</servlet-name>

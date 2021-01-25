@@ -16,7 +16,8 @@ import java.util.List;
 /**
  * @author wangyong
  */
-public class UploadServlet extends HttpServlet {
+public class Upload extends HttpServlet {
+
     private static final long serialVersionUID = 1L;
 
     // 上传文件存储目录

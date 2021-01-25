@@ -24,6 +24,7 @@ public class UserService implements UserServiceImp {
         }
     }
 
+    @Override
     public void regist(User user) throws Exception {
         //查询是否账号已经存在
         User dbUser = dao.findByLoginname(user.getLoginname());

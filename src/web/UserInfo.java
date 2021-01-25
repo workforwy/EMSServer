@@ -22,8 +22,9 @@ import java.util.Random;
 
 /**
  * 用于处理用户相关的请求
+ * @author wangyong
  */
-public class UserServlet extends HttpServlet {
+public class UserInfo extends HttpServlet {
 
     @Override
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,12 +34,18 @@ public class UserServlet extends HttpServlet {
         String uri = request.getRequestURI();
         uri = uri.substring(uri.lastIndexOf("/") + 1, uri.lastIndexOf("."));
         //手动分发请求
-        if (uri.equals("regist")) {
-            regist(request, response);
-        } else if (uri.equals("login")) {
-            login(request, response);
-        } else if (uri.equals("getCode")) {
-            getCode(request, response);
+        switch (uri) {
+            case "regist":
+                regist(request, response);
+                break;
+            case "login":
+                login(request, response);
+                break;
+            case "getCode":
+                getCode(request, response);
+                break;
+            default:
+                break;
         }
     }
 
@@ -117,7 +124,7 @@ public class UserServlet extends HttpServlet {
         String password = request.getParameter("password");
         String realname = request.getParameter("realname");
         String email = request.getParameter("email");
-        User user = new User(0, loginname, password, realname, email);
+        entity.User user = new entity.User(0, loginname, password, realname, email);
         //2. 调用业务层 执行注册业务
         UserServiceImp service = new UserService();
         try {

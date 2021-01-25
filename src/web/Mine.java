@@ -9,7 +9,7 @@ import javax.servlet.http.*;
 /**
  * @author wangyong
  */
-public class MyServlet extends HttpServlet {
+public class Mine extends HttpServlet {
 
     private String message;
 

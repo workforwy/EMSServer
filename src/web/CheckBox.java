@@ -1,6 +1,7 @@
 package web;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +10,7 @@ import java.io.PrintWriter;
 
 /**
  * Servlet implementation class CheckBox
+ *
  * @author wangyong
  */
 //@WebServlet("/CheckBox")
@@ -19,9 +21,9 @@ public class CheckBox extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 设置响应内容类型
-        response.setContentType("text/html;charset=GBK");
+        response.setContentType("text/html;charset=utf-8");
         PrintWriter out = response.getWriter();
-        String title = "读取复选框数据";
+        String title = "checkbox";
         String docType = "<!DOCTYPE html> \n";
         out.println(docType +
                 "<html>\n" +
@@ -41,7 +43,6 @@ public class CheckBox extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // 处理 POST 方法请求的方法
         doGet(request, response);
     }
 }
